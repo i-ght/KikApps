@@ -1,0 +1,39 @@
+﻿<Window x:Class="KikSessionCreator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KikSessionCreator"
+        mc:Ignorable="d"
+        Title="Kik Session Creator" Height="480" Width="640" Loaded="Window_Loaded" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Closing="Window_Closing">
+    <Grid>
+        <DockPanel LastChildFill="True">
+            <StatusBar DockPanel.Dock="Bottom" FontSize="10">
+                <Label x:Name="LblTtlLoginAttempts" Content="Total login attempts: [0]"/>
+                <Label x:Name="LblSuccessfulLogins" Content="Successful logins: [0]"/>
+                <Label x:Name="LblAccountsInQueue" Content="Accounts left in queue: [0]"/>
+            </StatusBar>
+
+            <TabControl DockPanel.Dock="Top" x:Name="TbMain" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                <TabItem Header="Monitor" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                        <DataGrid x:Name="ThreadMonitor" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" AutoGenerateColumns="False" RowHeaderWidth="28" ItemsSource="{Binding ThreadMonitorSource}" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Account" Width="123" Binding="{Binding Account}"/>
+                                <DataGridTextColumn Header="Status" Width="*"  Binding="{Binding Status}"/>
+                            </DataGrid.Columns>
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem x:Name="CmdLaunch"  Header="Launch" Click="CmdLaunch_OnClick"/>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Settings" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </Grid>
+</Window>
